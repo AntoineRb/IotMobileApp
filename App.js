@@ -7,6 +7,9 @@ import getModulesList from './services/getModulesList';
 import getDetailsList from './services/getDetailsList';
 import ModulesList from './Views/ModulesList';
 
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 export const MODULE_INITIAL_STATE = {
   id: 0,
   creationDate: undefined,
@@ -79,21 +82,19 @@ export default function App() {
     return detailsList;
   }
 
+  const Stack = createNativeStackNavigator();
+
   return (
-    <View style={styles.container}>
-      <ModulesList
-        modulesList={getModulesListState( modulesList )}
-        detailsList={getDetailsListState( detailsList )}
-      />
-    </View>
-  );
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Modules">
+              { props => <ModulesList {...props} modulesList={getModulesListState( modulesList )} detailsList={getDetailsListState( detailsList )} />}
+            </Stack.Screen>
+          </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  
 });

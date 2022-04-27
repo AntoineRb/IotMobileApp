@@ -1,9 +1,11 @@
-import { View, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import {v4 as uuidv4} from 'uuid';
 
 import ItemModule from '../Components/ItemModule'
 
 export default function ModulesList( props ) {  // detailsList and modulesList for Props
+
+    
 
     let modulesListMap = new Map();
     let moduleListArr = []
@@ -38,10 +40,24 @@ export default function ModulesList( props ) {  // detailsList and modulesList f
     }
 
     return (
-        <View>
-            {(moduleListArr.length > 0) &&
-                renderRow()
-            }
+        <View style={styles.container}>
+            <View style={styles.moduleList}>
+                {(moduleListArr.length > 0) &&
+                    renderRow()
+                }
+            </View>
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        width: '100%',
+        display: 'flex',
+        alignItems:'center',
+    },  
+    moduleList: {
+        width: '90%',
+        margin: 'auto'
+    },
+});
