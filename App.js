@@ -9,6 +9,8 @@ import ModulesList from './Views/ModulesList';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Details from './Views/Details';
+import AddModule from './Views/AddModule';
 
 export const MODULE_INITIAL_STATE = {
   id: 0,
@@ -25,6 +27,16 @@ export const DETAIL_INITIAL_STATE = {
   operatingTime: undefined,
   moduleState: false,
   dataCount: 0,
+  moduleId: 0
+}
+
+export const LOGS_INITIAL_STATE = {
+  value: 0,
+  minValue: 0,
+  maxValue: 0,
+  unit: "",
+  operatingTime: undefined,
+  moduleState: false,
   moduleId: 0
 }
 
@@ -52,9 +64,9 @@ export default function App() {
   }, []);
 
    // To Get All Modules Details
-   const [ detailsList, setDetailsList ]  = useState([DETAIL_INITIAL_STATE]);
+   const [ detailsList, setDetailsList ]  = useState(DETAIL_INITIAL_STATE); // REMOVE ARRAY of Detail for Init state
    const setDetailsListState = ( newDetailsList ) => {
-     if ( newDetailsList !== undefined ) {
+     if ( newDetailsList !== DETAIL_INITIAL_STATE ) {
        setDetailsList( newDetailsList );
       // console.log(newDetailsList);
      } 
@@ -90,6 +102,8 @@ export default function App() {
             <Stack.Screen name="Modules">
               { props => <ModulesList {...props} modulesList={getModulesListState( modulesList )} detailsList={getDetailsListState( detailsList )} />}
             </Stack.Screen>
+            <Stack.Screen name="Details" component={Details}/>
+            <Stack.Screen name="AddModule" component={AddModule}/>
           </Stack.Navigator>
         </NavigationContainer>
     );

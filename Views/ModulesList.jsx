@@ -3,6 +3,9 @@ import {v4 as uuidv4} from 'uuid';
 
 import ItemModule from '../Components/ItemModule'
 
+import BtnAddModule from "../Components/BtnAddModule";
+import { DETAIL_INITIAL_STATE, MODULE_INITIAL_STATE } from "../App";
+
 export default function ModulesList( props ) {  // detailsList and modulesList for Props
 
     
@@ -14,7 +17,7 @@ export default function ModulesList( props ) {  // detailsList and modulesList f
     // console.log( props.detailsList );
 
 
-    if ( props.modulesList !== undefined && props.detailsList !== undefined ) {
+    if ( props.modulesList !== MODULE_INITIAL_STATE && props.detailsList !== DETAIL_INITIAL_STATE ) {
         for ( let module of props.modulesList ) {
             if ( module.id === 0 ) {
                 continue;
@@ -30,7 +33,7 @@ export default function ModulesList( props ) {  // detailsList and modulesList f
             if ( detail.moduleId !== 0) {
                 let moduleID = detail.moduleId;
                 let module = modulesListMap.get( moduleID );
-                moduleListArr.push(<ItemModule key={detail.moduleId} module={module} detail={detail}/>);
+                moduleListArr.push(<ItemModule key={detail.moduleId} module={module} detail={detail} navigation={props.navigation}/>);
             }
         }
     }
@@ -46,15 +49,19 @@ export default function ModulesList( props ) {  // detailsList and modulesList f
                     renderRow()
                 }
             </View>
+            <BtnAddModule style={styles.btnAddModule} navigation={props.navigation}/>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
+        height: '100%',
         width: '100%',
         display: 'flex',
+        justifyContent: 'space-evenly',
         alignItems:'center',
+        backgroundColor: '#f2f2f2',
     },  
     moduleList: {
         width: '90%',

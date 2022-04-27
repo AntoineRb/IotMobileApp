@@ -2,26 +2,40 @@ import { useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { formatDate, getTimeBewtweenDate } from '../utils';
 
-const ItemModule = ( props ) => {
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-    // console.log('\n' + 'into module');
-    // console.log( props.detail["moduleState"] );
-    // console.log( props.module["module"].name );
+const ItemModule = ( props ) => {
 
     return (
         <View style={styles.itemModuleContainer}>
+                {/* <Text style={styles.moduleNameTitle}>Nom du module :</Text> */}
             <View style={styles.nameContainer}>
-                <Text style={styles.moduleNameTitle}>Nom du module :</Text>
-                <Text style={ props.detail['moduleState'] ? styles.moduleNameActive : styles.modulesNameInactive}>{  props.module["module"].name }</Text>
+                <Text style={ props.detail['moduleState'] ? styles.moduleNameActive : styles.modulesNameInactive}>
+                    {  props.module !== undefined ? props.module["module"].name : 'XXX' }
+                </Text>
             </View>
             <View style={styles.opearatingTimeContainer}>
                 <Text style={styles.opearatingTimeTitle}>
-                    {props.detail['moduleStat'] ? 'Actif' : 'Inacatif'} depuis :
+                    <Text style={ props.detail['moduleState'] ? styles.moduleStateGreen : styles.moduleStateRed} >
+                        {props.detail['moduleState'] ? 'Actif ' : 'Inacatif '} 
+                    </Text>
+                    depuis :
                 </Text>
                 <Text style={styles.operatingTime}>
-                    {getTimeBewtweenDate(  props.detail["operatingTime"], new Date( Date.now() ))}
+                    <Icon name='clock-o' size={12}/> 
+                    { props.detail !== undefined  ? getTimeBewtweenDate(  props.detail["operatingTime"], new Date( Date.now() )) : 'XXX'}
                 </Text>
             </View>
+            <Icon.Button 
+                name='area-chart' 
+                size={20}
+                backgroundColor='#0275d8'
+                onPress={() => props.navigation.navigate('Details',{
+                    moduleId: props.detail['moduleId']
+                })}
+            >
+                Activity
+            </Icon.Button>
             <View style={ props.detail['moduleState'] ? styles.circleGreen : styles.circleRed }></View>
         </View>
     );
@@ -42,7 +56,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         //Shadow
         elevation: 20,
-        shadowColor: '#171717',
+        shadowColor: '#d0d0d0',
     },
     // Name Section
     nameContainer: {
@@ -65,13 +79,19 @@ const styles = StyleSheet.create({
     },
     // OperatingTime Section
     opearatingTimeContainer: {
-        width: '25%',
+        width: '30%',
         display: 'flex',
         flexDirection: 'column',
     },
     opearatingTimeTitle: {
         fontSize: 10,
         fontWeight: 'bold',
+    },
+    moduleStateGreen: {
+        color: 'green',
+    },
+    moduleStateRed: {
+        color: 'red',
     },
     operatingTime: {
         fontSize: 12,

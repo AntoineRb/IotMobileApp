@@ -13,7 +13,7 @@ const getAllLogsValues =  async ( moduleId, setValueFunc ) => {
     .then( response => response.json() )
     .then(( response ) => {
         setValueFunc( response );
-        console.log(response);
+        // console.log(response);
     })
     .catch(( err ) => {
         throw err;
