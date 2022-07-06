@@ -5,12 +5,14 @@ import { StyleSheet, Text, View } from 'react-native';
 // Request
 import getModulesList from './services/getModulesList';
 import getDetailsList from './services/getDetailsList';
-import ModulesList from './Views/ModulesList';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import ModulesList from './Views/ModulesList';
 import Details from './Views/Details';
 import AddModule from './Views/AddModule';
+import LogsView from './Views/LogsView';
 
 export const MODULE_INITIAL_STATE = {
   id: 0,
@@ -102,7 +104,8 @@ export default function App() {
             <Stack.Screen name="Modules">
               { props => <ModulesList {...props} modulesList={getModulesListState( modulesList )} detailsList={getDetailsListState( detailsList )} />}
             </Stack.Screen>
-            <Stack.Screen name="Details" component={Details}/>
+            <Stack.Screen name="Détails" component={Details}/>
+            <Stack.Screen name='Historique' component={LogsView} />
             <Stack.Screen name="AddModule" component={AddModule}/>
           </Stack.Navigator>
         </NavigationContainer>

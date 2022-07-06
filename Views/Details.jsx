@@ -90,7 +90,7 @@ export default function Details( props ) {
                     title="Historique"
                     color="#0275d8"
                     style={styles.btnHistory}
-                    onPress={() => alert('Historique')}     
+                    onPress={() => props.navigation.navigate('Historique', { moduleId: moduleId })}     
                 />
 
             </View>
@@ -130,19 +130,22 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems:'center',
+        alignItems: 'stretch',
     },
     value: {
         fontSize: 50,
+        fontWeight: '200'
     },
     unit: {
         fontSize: 25,
+        color: 'gray'
     },
     lastUpdate: {
         width: '100%',
-        fontSize: 15,
+        fontSize: 11,
         textAlign: 'center',
         marginVertical: 15,
+        color: 'gray'
     },
     btnHistory: {
 

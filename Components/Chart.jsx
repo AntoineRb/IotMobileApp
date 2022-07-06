@@ -6,18 +6,6 @@ import { LOGS_INITIAL_STATE } from "../App";
 
 const Chart = ( props ) => {
 
-  // const data = {
-  //   labels: [0, 1, 2, 3],
-  //   datasets: [
-  //     {
-  //       data: [0, 3 ,4 ,8 ,2],
-  //       color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
-  //       strokeWidth: 2 // optional
-  //     }
-  //   ],
-  //   legend: [`Mesure éffectuée`] // optional
-  // };
-
   let screenWidth = Dimensions.get('window').width;
   screenWidth -= (screenWidth / 100) * 10
   const chartConfig = {

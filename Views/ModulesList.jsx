@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
-import {v4 as uuidv4} from 'uuid';
+
+import uuid from 'react-native-uuid';
 
 import ItemModule from '../Components/ItemModule'
 
@@ -33,7 +34,7 @@ export default function ModulesList( props ) {  // detailsList and modulesList f
             if ( detail.moduleId !== 0) {
                 let moduleID = detail.moduleId;
                 let module = modulesListMap.get( moduleID );
-                moduleListArr.push(<ItemModule key={detail.moduleId} module={module} detail={detail} navigation={props.navigation}/>);
+                moduleListArr.push(<ItemModule key={ uuid.v4() } module={module} detail={detail} navigation={props.navigation}/>);
             }
         }
     }

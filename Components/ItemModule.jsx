@@ -23,14 +23,14 @@ const ItemModule = ( props ) => {
                 </Text>
                 <Text style={styles.operatingTime}>
                     <Icon name='clock-o' size={12}/> 
-                    { props.detail !== undefined  ? getTimeBewtweenDate(  props.detail["operatingTime"], new Date( Date.now() )) : 'XXX'}
+                    { props.detail !== undefined  ? ' ' + getTimeBewtweenDate(  props.detail["operatingTime"], new Date( Date.now() )) : 'XXX'}
                 </Text>
             </View>
             <Icon.Button 
                 name='area-chart' 
                 size={20}
                 backgroundColor='#0275d8'
-                onPress={() => props.navigation.navigate('Details',{
+                onPress={() => props.navigation.navigate('Détails',{
                     moduleId: props.detail['moduleId']
                 })}
             >
